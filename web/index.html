@@ -14,7 +14,7 @@
 </head>
 <body>
 <div ng-app="markedApp">
-    <table>
+    <table id="header" cellpadding="0" cellspacing="0">
         <tr>
             <td>
                 Developed by <a href="mailto:dvapelnik@gmail.com">@dvapelnik</a>
@@ -42,10 +42,11 @@
 <script type="text/javascript">
     $(document).ready(function (e) {
         $('table.writer td > textarea, table.writer td > div').height($(document).height() - 54);
+        $('#editor').focus();
     });
 
-    $('#editor').focus();
-
+    // http://stackoverflow.com/questions/18952623/synchronized-scrolling-using-jquery?answertab=votes#tab-top
+    // begin
     var $divs = $('#editor, #viewer');
     var sync = function (e) {
         var $other = $divs.not(this).off('scroll'), other = $other.get(0);
@@ -56,7 +57,8 @@
             $other.on('scroll', sync);
         }, 10);
     };
-    $divs.on('scroll', sync);8
+    $divs.on('scroll', sync);
+    // end
 </script>
 
 </body>
