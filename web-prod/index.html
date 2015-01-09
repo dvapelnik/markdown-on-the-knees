@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Written on the knee MarkDown Editor</title>
+
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/marked.js"></script>
+    <script type="text/javascript" src="js/marked.app.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="css/github-markdown.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<div ng-app="markedApp">
+    <table id="header" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>
+                Developed by <a href="mailto:dvapelnik@gmail.com">@dvapelnik</a>
+            </td>
+            <td>
+                <h1 class="header">Written on the knee MarkDown Editor</h1>
+            </td>
+            <td class="markdown-resource-link">
+                <a href="https://guides.github.com/features/mastering-markdown/" target="_blank">Markdown supported</a>
+            </td>
+        </tr>
+    </table>
+    <table width="100%" class="writer">
+        <tr>
+            <td width="50%">
+                <textarea ng-model="text" id="editor"></textarea>
+            </td>
+            <td width="50%">
+                <div id="viewer" class="markdown-body" ng-bind-html="text | markedTrustHtml"></div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function (e) {
+        $('table.writer td > textarea, table.writer td > div').height($(document).height() - 54);
+        $('#editor').focus();
+    });
+
+    // http://stackoverflow.com/questions/18952623/synchronized-scrolling-using-jquery?answertab=votes#tab-top
+    // begin
+    var $divs = $('#editor, #viewer');
+    var sync = function (e) {
+        var $other = $divs.not(this).off('scroll'), other = $other.get(0);
+        var percentage = this.scrollTop / (this.scrollHeight - this.offsetHeight);
+        other.scrollTop = percentage * (other.scrollHeight - other.offsetHeight);
+        // Firefox workaround. Rebinding without delay isn't enough.
+        setTimeout(function () {
+            $other.on('scroll', sync);
+        }, 10);
+    };
+    $divs.on('scroll', sync);
+    // end
+</script>
+
+</body>
+</html>

@@ -34,5 +34,5 @@ phpunit.phar
 !/.efig/xd_trace/.gitkeep
 !/.efig/xd_profile/.gitkeep
 
-/web/bower
+/web-dev/bower
 /.bowerrc
