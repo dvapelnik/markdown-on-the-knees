@@ -26,5 +26,13 @@ phpunit.phar
 # local phpunit config
 /phpunit.xml
 
+# efig ignore
+/.efig/logs/*
+/.efig/xd_trace/*
+/.efig/xd_profile/*
+!/.efig/logs/.gitkeep
+!/.efig/xd_trace/.gitkeep
+!/.efig/xd_profile/.gitkeep
+
 /web/bower
 /.bowerrc
